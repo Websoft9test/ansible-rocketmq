@@ -1,6 +1,6 @@
 # RocketMQ 自动化安装与部署
 
-本项目是由 [Websoft9](http://www.websoft9.com) 研发的 [RocketMQ](https://www.rocketmq.com) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 RocketMQ，让原本复杂的安装过程变得没有任何技术门槛。  
+本项目是由 [Websoft9](http://www.websoft9.com) 研发的 [RocketMQ](http://rocketmq.apache.org/) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 RocketMQ，让原本复杂的安装过程变得没有任何技术门槛。  
 
 本项目是开源项目，采用 LGPL3.0 开源协议。
 
@@ -9,7 +9,7 @@
 操作系统：目支持 Ubuntu16.x 以上部署此脚本  
 硬件配置：测试环境最低1核1G，10G系统盘空间，否则无法安装。生产环境请根据业务情况选择服务器配置
 
-更多要求请参考[官方安装文档](https://www.rocketmq.com/download.html#package-repositories)
+更多要求请参考[官方安装文档](http://rocketmq.apache.org/docs/quick-start/)
 
 ## 组件
 
@@ -19,7 +19,17 @@
 
 ## 本项目安装的是 RocketMQ 最新版吗？
 
-本项目通过官方提供的 RocketMQ 在线安装源的方式安装，官方可以保证每次安装均可为最新版本。
+本项目通过下载 RocketMQ 安装包的方式安装，需要维护 [main.yml](/roles/rocketmq/task/main.yml) 中 src 对应的下载地址
+
+```
+- name: Download RocketMQ
+      unarchive:
+        src: https://mirrors.tuna.tsinghua.edu.cn/apache/rocketmq/4.5.1/rocketmq-all-4.5.1-bin-release.zip
+        dest: /opt/
+        remote_src: yes
+        owner: rocketmq
+        group: rocketmq
+```
 
 
 ## 安装指南

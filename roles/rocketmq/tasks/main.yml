@@ -1,34 +1,70 @@
-    - name: add a key used to sign RabbitMQ
-      apt_key:
-        keyserver: hkps.pool.sks-keyservers.net
-        id: 6B73A36E6026DFCA
-    
-    - name: add the apt repository
-      apt_repository:
-       repo: "{{item}}"
-       state: present
-       filename: bintray.rabbitmq
-      with_items:
-        - deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
-        - deb https://dl.bintray.com/rabbitmq/debian bionic main
-    
-    - name: Install RabbitMQ
+     - name: Install JDK
       apt:
-        name: rabbitmq-server
+        name: openjdk-8-jdk
 
-    - name: enable RabbitMQ HTTP API
-      shell: rabbitmq-plugins enable rabbitmq_management
+    - name: Add RocketMQ User
+      user:
+       name: rocketmq
+       shell: /usr/sbin/nologin
+       home: /opt/rocketmq
+       create_home: no
 
-    - name: Add RabbitMQ admin User
-      shell:  rabbitmqctl add_user admin admin
+    - name: Download RocketMQ
+      unarchive:
+        src: https://mirrors.tuna.tsinghua.edu.cn/apache/rocketmq/4.5.1/rocketmq-all-4.5.1-bin-release.zip
+        dest: /opt/
+        remote_src: yes
+        owner: rocketmq
+        group: rocketmq
+        
+    - shell: mv /opt/rocketmq-* /opt/rocketmq
 
-    - name: setting admin user tags 
-      shell: rabbitmqctl set_user_tags admin administrator
+    - name: Setting Environment
+      shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
 
-    - name: Restart RabbitMQ Server
+    - name: Configuration Name Server
+      copy: 
+        src: runserver.sh
+        dest: /opt/rocketmq/bin/
+        owner: rocketmq
+        group: rocketmq
+
+    - name: Configuration Broker
+      copy: 
+        src: runbroker.sh
+        dest: /opt/rocketmq/bin/
+        owner: rocketmq
+        group: rocketmq
+        
+    - name: Configuration RocketMQ Name Server
+      copy:
+        src: mqnamesrv.service
+        dest: /lib/systemd/system/
+
+    - name: Configuration RocketMQ Broker Server
+      copy:
+        src: mqbroker.service
+        dest: /lib/systemd/system/
+  
+    - name: Start RocketMQ Name Server
       service:
-        name: rabbitmq-server
-        state: restarted
+        name: mqnamesrv
+        state: started
         enabled: yes
+
+    - name: Start RocketMQ Broker Server
+      service:
+        name: mqbroker
+        state: started
+        enabled: yes
+
+    # - name: Setting File Permission
+    #   shell: find /opt -type f -exec chmod 640 {} \;
+
+    # - name: Setting Directory Permission
+    #   shell: find /opt -type d -exec chmod 750 {} \;  
+
+    - name: Setting Owner and  Group
+      shell: chown -R rocketmq. /opt/rocketmq
 
 
