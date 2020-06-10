@@ -21,7 +21,8 @@
 
 - name:   change dirctory
   shell:
-     cd /opt/rocketmq/rocketmq-all-4.7.0-source-release/
+     cd /opt/rocketmq-all-4.7.0-source-release
+
    
 
 
