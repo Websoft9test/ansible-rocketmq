@@ -1,6 +1,8 @@
-- name: Install JDK
+- name: Install maven
   apt:
-    name: openjdk-8-jdk
+    name: maven
+
+
 
 - name: Add RocketMQ User
   user:
@@ -10,12 +12,14 @@
     create_home: no
 
 - name: Download RocketMQ
-  unarchive:
-    src: "{{rocketmq_download_url}}"
-    dest: /opt/
-    remote_src: yes
-    owner: rocketmq
-    group: rocketmq
+  shell: |
+     wget {{rocketmq_download_url}}
+     unzip rocketmq-all-4.7.0-source-release.zip 
+     cd rocketmq-all-4.7.0/
+    
+
+- name: build the binary artifact
+  shell: mvn -Prelease-all -DskipTests clean install -U
     
 - shell: mv /opt/rocketmq-* /opt/rocketmq
 
