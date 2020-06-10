@@ -2,8 +2,8 @@
 Description=RocketMQ Name Server
 After=network.target
 [Service]
-ExecStart=/rocketmq-all-4.7.0-source-release/distribution/target/rocketmq-4.7.0/rocketmq-4.7.0/bin  mqnamesrv 
-ExecStop=/rocketmq-all-4.7.0-source-release/distribution/target/rocketmq-4.7.0/rocketmq-4.7.0/bin/mqshutdown namesrv
+ExecStart=/opt/rocketmq/rocketmq-all-4.7.0-source-release/distribution/target/rocketmq-4.7.0/rocketmq-4.7.0/bin  mqnamesrv 
+ExecStop=/opt/rocketmq/rocketmq-all-4.7.0-source-release/distribution/target/rocketmq-4.7.0/rocketmq-4.7.0/bin/mqshutdown namesrv
 User=rocketmq
 Group=rocketmq
 [Install]
