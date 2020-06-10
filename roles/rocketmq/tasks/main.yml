@@ -12,7 +12,7 @@
     create_home: no
 
 - name: Download RocketMQ
-  shell:
+  unarchive:
     src: "{{rocketmq_download_url}}"
     dest: /opt/
     remote_src: yes
