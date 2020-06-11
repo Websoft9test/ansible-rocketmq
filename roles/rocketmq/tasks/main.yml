@@ -23,9 +23,6 @@
   shell:
      cd /opt/rocketmq-all-4.7.0-source-release
 
-   
-
-
 - name: build the binary artifact
   shell:
     mvn -Prelease-all -DskipTests clean install -U
