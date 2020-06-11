@@ -20,12 +20,10 @@
     group: rocketmq
 
 - name:   change dirctory
-  shell:
+  shell: |
      cd /opt/rocketmq-all-4.7.0-source-release
+     mvn -Prelease-all -DskipTests clean install -U
 
-- name: build the binary artifact
-  shell:
-    mvn -Prelease-all -DskipTests clean install -U
  
     
     
