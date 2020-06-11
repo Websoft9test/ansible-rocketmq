@@ -27,7 +27,10 @@
 
 
 - name: build the binary artifact
-  shell: mvn -Prelease-all -DskipTests clean install -U
+  shell:
+    mvn -Prelease-all -DskipTests clean install -U
+ 
+    
     
 - shell: mv /opt/rocketmq-* /opt/rocketmq
 
