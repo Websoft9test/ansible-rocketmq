@@ -19,12 +19,12 @@
     owner: rocketmq
     group: rocketmq
 
-- name:   change dirctory
-  shell: |
-     cd /opt/rocketmq-all-4.7.0-source-release
-     mvn -Prelease-all -DskipTests clean install -U
+     
 
- 
+- name: This command will change the working directory to somedir/.
+  shell:
+    cmd: mvn -Prelease-all -DskipTests clean install -U
+    chdir: /opt/rocketmq-all-4.7.0-source-release
     
     
 - shell: mv /opt/rocketmq-* /opt/rocketmq
