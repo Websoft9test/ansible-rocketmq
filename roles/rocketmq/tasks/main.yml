@@ -25,8 +25,8 @@
     cmd: mvn -Prelease-all -DskipTests clean install -U
     chdir: /opt/rocketmq-all-4.7.0-source-release
     
-- name:  rename 
-- shell: mv /opt/rocketmq-* /opt/rocketmq
+- name: rename 
+  shell: mv /opt/rocketmq-* /opt/rocketmq
 
 - name: Setting Environment
   shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
