@@ -1,7 +1,6 @@
-- name: Install maven
-  apt:
-    name: maven
-
+# install by OS family
+- name: Install this role on {{ansible_os_family}}
+  include: "{{ansible_os_family}}.yml"
 
 
 - name: Add RocketMQ User
@@ -21,12 +20,12 @@
 
      
 
-- name: This command will change the working directory to somedir/.
+- name: use maven to compile
   shell:
     cmd: mvn -Prelease-all -DskipTests clean install -U
     chdir: /opt/rocketmq-all-4.7.0-source-release
     
-    
+- name:  rename 
 - shell: mv /opt/rocketmq-* /opt/rocketmq
 
 - name: Setting Environment
