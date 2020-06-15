@@ -1,2 +1,3 @@
 #全局
-jdk_version: "11" 
+jdk_version: "11"  
+jdk_distribution: "jdk"

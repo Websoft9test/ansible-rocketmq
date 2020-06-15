@@ -7,8 +7,6 @@
   user:
     name: rocketmq
     shell: /usr/sbin/nologin
-    home: /opt/rocketmq
-    create_home: no
 
 - name: Download RocketMQ
   unarchive:
