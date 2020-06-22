@@ -2,8 +2,8 @@
 Description=RocketMQ Broker
 After=network.target
 [Service]
-ExecStart=/opt/rocketmq/rocketmq-all-4.7.0-source-release/distribution/bin/mqbroker -n localhost:9876
-ExecStop=/opt/rocketmq/rocketmq-all-4.7.0-source-release/distribution/bin/mqshutdown broker
+ExecStart=/opt/rocketmq/bin/mqbroker -n localhost:9876
+ExecStop=/opt/rocketmq/bin/mqshutdown broker
 User=rocketmq
 Group=rocketmq
 [Install]

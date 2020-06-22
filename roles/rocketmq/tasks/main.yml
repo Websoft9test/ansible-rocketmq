@@ -1,27 +1,11 @@
-# install by OS family
-- name: Install this role on {{ansible_os_family}}
-  include: "{{ansible_os_family}}.yml"
-
-
-- name: Add RocketMQ User
-  user:
-    name: rocketmq
-    shell: /usr/sbin/nologin
-
+#Installnation on  different os is same  
 - name: Download RocketMQ
   unarchive:
     src: "{{rocketmq_download_url}}"
     dest: /opt/
     remote_src: yes
     owner: rocketmq
-    group: rocketmq
-
-     
-
-- name: use maven to compile
-  shell:
-    cmd: mvn -Prelease-all -DskipTests clean install -U
-    chdir: /opt/rocketmq-all-4.7.0-source-release
+    group: rocketmq 
     
 - name: rename 
   shell: mv /opt/rocketmq-* /opt/rocketmq
@@ -29,20 +13,6 @@
 - name: Setting Environment
   shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
 
-- name: Configuration Name Server
-  copy: 
-    src: runserver.sh
-    dest: /opt/rocketmq/bin/
-    owner: rocketmq
-    group: rocketmq
-
-- name: Configuration Broker
-  copy: 
-    src: runbroker.sh
-    dest: /opt/rocketmq/bin/
-    owner: rocketmq
-    group: rocketmq
-    
 - name: Configuration RocketMQ Name Server
   copy:
     src: mqnamesrv.service
@@ -65,12 +35,6 @@
     state: started
     enabled: yes
 
-- name: Setting File Permission
-  shell: |
-    find /opt -type f -exec chmod 640 {} \;
-    find /opt -type d -exec chmod 750 {} \;  
 
-- name: Setting Owner and  Group
-  shell: chown -R rocketmq. /opt/rocketmq
 
 
