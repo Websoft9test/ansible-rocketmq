@@ -35,6 +35,11 @@
     state: started
     enabled: yes
 
-
+# set soft link, -f enforce the exist links
+# ln -sf src des
+- name: set soft link
+  shell: |
+    ln -sf /opt/rocketmq  /data/wwwroot
+    ln -sf /opt/rocketmq/conf /data/config
 
 

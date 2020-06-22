@@ -1,0 +1,153 @@
+# RocketMQ Notes
+
+组件名称：RocketMQ 
+安装文档：  https://rocketmq.apache.org/docs/quick-start/  
+配置文档：  https://rocketmq.apache.org/docs/quick-start/ 
+支持平台： Debian家族 | RHEL家族 | Windows | Kubernetes |Docker|Mac
+
+责任人：helin
+
+## 概要
+
+RcoketMQ 是一款低延迟、高可靠、可伸缩、易于使用的消息中间件。
+
+## 环境要求
+
+* 程序语言：Java 
+* 应用服务器：自带
+* 数据库：无
+* 依赖组件：
+* 服务器配置：
+* 其他：
+
+## 安装说明
+
+
+### Linux
+
+
+
+
+
+```shell
+#下载
+cd /opt
+wget  https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip  
+unzip  rocketmq-all-4.7.0-bin-release.zip  
+cd /opt/rocketmq-all-4.7.0-bin-release/bin 
+sh bin/mqnamesrv 
+sh bin/mqbroker -n localhost:9876 
+
+```
+
+
+
+## 配置
+
+安装完成后，需要依次完成如下配置
+
+
+
+```shell
+export NAMESRV_ADDR=localhost:9876
+
+```
+
+## 路径
+
+* 程序路径：/opt/rocketmq-all-4.7.0-bin-release/bin
+* 日志路径：
+* 配置文件路径： /opt/rocketmq-all-4.7.0-bin-release/conf
+* 其他...
+
+## 账号密码
+
+### 数据库密码
+
+如果有数据库
+
+* 数据库安装方式：包管理工具自带 or 自行安装
+* 账号密码：
+
+### 后台账号
+
+如果有后台账号
+
+* 登录地址
+* 账号密码
+* 密码修改方案：最好是有命令行修改密码的方案
+
+
+## 服务
+
+
+
+服务mqnamesrv.service
+
+```
+[Unit]
+Description=RocketMQ Name Server
+After=network.target
+[Service]
+ExecStart=/opt/rocketmq/bin  mqnamesrv 
+ExecStop=/opt/rocketmq/bin/mqshutdown namesrv
+User=rocketmq
+Group=rocketmq
+[Install]
+WantedBy=multi-user.target
+```
+
+服务mqbroker.service
+
+```
+[Unit]
+Description=RocketMQ Broker
+After=network.target
+[Service]
+ExecStart=/opt/rocketmq/bin/mqbroker -n localhost:9876
+ExecStop=/opt/rocketmq/bin/mqshutdown broker
+User=rocketmq
+Group=rocketmq
+[Install]
+WantedBy=multi-user.target
+```
+
+
+
+## 环境变量
+
+列出需要增加的环境变量以及增加环境变量的命令：
+
+* 名称 | 路径
+
+## 版本号
+
+通过如下的命令获取主要组件的版本号: 
+
+```
+# Check RocketMQ version
+
+
+```
+
+## 常见问题
+
+#### 有没有管理控制台？
+
+*http:// 公网 IP:15672* 即可访问控制台，系统默认存在一个无法通过外网访问的guest/guest账号
+
+#### 本项目需要开启哪些端口？
+
+| item      | port  |
+| --------- | ----- |
+| lustering | 25672 |
+| AMQP      | 5672  |
+| http      | 15672 |
+
+#### 有没有CLI工具？
+
+有，通过`bash mqadmin help clusterList` 查看工具的说明
+
+#### 安装后是否需要创建普通用户？
+
+有，rabbitmq
