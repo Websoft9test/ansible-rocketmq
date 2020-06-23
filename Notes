@@ -140,7 +140,7 @@ echo 'export PATH="$PATH:/opt/rocketmq-all-4.7.0-bin-release/bin"' >> /etc/profi
 
 | item      | port  |
 | --------- | ----- |
-| lustering |       |
+| listening |       |
 | AMQP      |       |
 | http      | 10909 |
 
