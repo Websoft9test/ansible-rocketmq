@@ -4,8 +4,7 @@
     src: "{{rocketmq_download_url}}"
     dest: /opt/
     remote_src: yes
-   
-    
+       
 - name: rename 
   shell: mv /opt/rocketmq-* /opt/rocketmq
 
@@ -25,7 +24,7 @@
 - name: Start RocketMQ Name Server
   service:
     name: mqnamesrv
-    state: started
+    state: started 
     enabled: yes
 
 - name: Start RocketMQ Broker Server
@@ -33,6 +32,9 @@
     name: mqbroker
     state: started
     enabled: yes
+
+- name: Reload daemon service
+  shell: systemctl daemon-reload    
 
 # set soft link, -f enforce the exist links
 # ln -sf src des
