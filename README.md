@@ -13,13 +13,13 @@
 | 操作系统       | Ubuntu16.04以上       |   |
 | 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 | 可选 |
 | 私有云|  KVM, VMware, VirtualBox, OpenStack | 可选 |
-| 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |
+| 服务器配置 | 最低1核16G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |
 
 更多要求请参考[官方安装文档](http://rocketmq.apache.org/docs/quick-start/)
 
 ## 组件
 
-包含的核心组件为：RocketMQ, Erlang
+包含的核心组件为：RocketMQ
 
 更多请见[参数表](/docs/zh/stack-components.md)
 
@@ -31,7 +31,7 @@
 rocketmq_download_url: "https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip"
 ```
 
-如果你发现不是最新版本，请到 [RocketMQ Releases页面](https://github.com/apache/rocketmq/releases)获取最新版源码下载链接，再修改 [main.yml](/roles/rocketmq/defaults/main.yml) 中的 ```rocketmq_download_url``` 变量值即可安装最新版 RocketMQ。  
+如果你发现不是最新版本，请到 [RocketMQ Releases页面](https://github.com/apache/rocketmq/releases)获取最新版二进制下载链接，再修改 [main.yml](/roles/rocketmq/defaults/main.yml) 中的 ```rocketmq_download_url``` 变量值即可安装最新版 RocketMQ。  
 
 ## 安装指南
 

@@ -3,7 +3,7 @@
 组件名称：RocketMQ 
 安装文档：  https://rocketmq.apache.org/docs/quick-start/  
 配置文档：  https://rocketmq.apache.org/docs/quick-start/ 
-支持平台： Debian家族 | RHEL家族 | Windows | Kubernetes |Docker|Mac
+支持平台： Debian家族 | RHEL家族 | Windows | Kubernetes | Docker | Mac
 
 责任人：helin
 
@@ -17,7 +17,7 @@ RcoketMQ 是一款低延迟、高可靠、可伸缩、易于使用的消息中�
 * 应用服务器：自带
 * 数据库：无
 * 依赖组件：
-* 服务器配置：
+* 服务器配置：16G内存以上
 * 其他：
 
 ## 安装说明
@@ -35,8 +35,8 @@ cd /opt
 wget  https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip  
 unzip  rocketmq-all-4.7.0-bin-release.zip  
 cd /opt/rocketmq-all-4.7.0-bin-release/bin 
-sh bin/mqnamesrv 
-sh bin/mqbroker -n localhost:9876 
+sh mqnamesrv 
+sh mqbroker -n localhost:9876 
 
 ```
 
@@ -119,6 +119,7 @@ WantedBy=multi-user.target
 列出需要增加的环境变量以及增加环境变量的命令：
 
 * 名称 | 路径
+echo 'export PATH="$PATH:/opt/rocketmq-all-4.7.0-bin-release/bin"' >> /etc/profile
 
 ## 版本号
 
@@ -134,15 +135,14 @@ WantedBy=multi-user.target
 
 #### 有没有管理控制台？
 
-*http:// 公网 IP:15672* 即可访问控制台，系统默认存在一个无法通过外网访问的guest/guest账号
-
+*
 #### 本项目需要开启哪些端口？
 
 | item      | port  |
 | --------- | ----- |
-| lustering | 25672 |
-| AMQP      | 5672  |
-| http      | 15672 |
+| lustering |       |
+| AMQP      |       |
+| http      | 10909 |
 
 #### 有没有CLI工具？
 
@@ -150,4 +150,3 @@ WantedBy=multi-user.target
 
 #### 安装后是否需要创建普通用户？
 
-有，rabbitmq
