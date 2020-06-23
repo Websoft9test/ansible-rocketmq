@@ -4,8 +4,7 @@
     src: "{{rocketmq_download_url}}"
     dest: /opt/
     remote_src: yes
-    owner: rocketmq
-    group: rocketmq 
+   
     
 - name: rename 
   shell: mv /opt/rocketmq-* /opt/rocketmq
