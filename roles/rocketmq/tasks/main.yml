@@ -5,9 +5,10 @@
     dest: /data/wwwroot
     remote_src: yes
        
-- name: rename 
+- name: Rename  
   shell: |
-     [ ! d /data/wwwroot/rocketmq ] ||  mv /data/wwwroot/rocketmq-* /data/wwwroot/rocketmq 
+    rm -rf /data/wwwroot/rocketmq*
+    mv /data/wwwroot/rocketmq-* /data/wwwroot/rocketmq 
 
 - name: Setting Environment
   shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
