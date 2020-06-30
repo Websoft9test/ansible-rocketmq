@@ -2,11 +2,11 @@
 - name: Download RocketMQ
   unarchive:
     src: "{{rocketmq_download_url}}"
-    dest: /opt/
+    dest: /data/wwwroot
     remote_src: yes
        
 - name: rename 
-  shell: mv /opt/rocketmq-* /opt/rocketmq
+  shell: mv /data/wwwroot/rocketmq-* /data/wwwroot/rocketmq
 
 - name: Setting Environment
   shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
@@ -21,6 +21,9 @@
     src: mqbroker.service
     dest: /lib/systemd/system/
 
+- name: Reload daemon service
+  shell: systemctl daemon-reload 
+
 - name: Start RocketMQ Name Server
   service:
     name: mqnamesrv
@@ -32,15 +35,30 @@
     name: mqbroker
     state: started
     enabled: yes
-
-- name: Reload daemon service
-  shell: systemctl daemon-reload    
-
+   
 # set soft link, -f enforce the exist links
 # ln -sf src des
-- name: set soft link
-  shell: |
-    ln -sf /opt/rocketmq  /data/wwwroot
-    ln -sf /opt/rocketmq/conf /data/config
+#- name: set soft link
+#  shell: |
+#    ln -sf /opt/rocketmq  /data/wwwroot
+#    ln -sf /opt/rocketmq/conf /data/config
+
+# Check version,
+# must use sudo sh -c to solve the no-root permission
+#- block:
+#  - name: Check rocketchat Version
+#    shell: sudo sh -c "echo `` >> /data/logs/install_version.txt"
+
+
+# check service state
+- name: Check mqnamesrv Service
+  shell: systemctl status mqnamesrv | grep Active*
+  register: check_mqnamesrv_service
+  notify: check_mqnamesrv_service
+
+- name: Check mqbroker Service
+  shell: systemctl status mqbroker | grep Active*
+  register: check_mqbroker_service
+  notify: check_mqbroker_service
 
 
