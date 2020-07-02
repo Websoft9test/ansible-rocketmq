@@ -5,33 +5,30 @@
     dest: /data/wwwroot
     remote_src: yes
        
-- name: Rename  
+- name: Rename for rocketmq 
   shell: |
     mv /data/wwwroot/rocketmq-* /data/wwwroot/rocketmq 
 
 - name: Setting Environment
-  shell: echo 'export PATH="$PATH:/opt/rocketmq/bin"' >> /etc/profile
+  shell: export PATH="$PATH:/data/wwwroot/rocketmq/bin"
 
 - name: Configuration RocketMQ Name Server
   copy:
     src: mqnamesrv.service
-    dest: /lib/systemd/system/
+    dest: '/lib/systemd/system/mqnamesrv.service'
 
 - name: Configuration RocketMQ Broker Server
   copy:
     src: mqbroker.service
-    dest: /lib/systemd/system/
+    dest: '/lib/systemd/system/mqbroker.service'
 
-- name: Reload daemon service
-  shell: systemctl daemon-reload 
-
-- name: Start RocketMQ Name Server
+- name: Start and Enable  RocketMQ Name Server
   service:
     name: mqnamesrv
     state: started 
     enabled: yes
 
-- name: Start RocketMQ Broker Server
+- name: Start and Enable  RocketMQ Broker Server
   service:
     name: mqbroker
     state: started
@@ -51,7 +48,7 @@
 #    shell: sudo sh -c "echo `` >> /data/logs/install_version.txt"
 
 
-# check service state
+check service state
 - name: Check mqnamesrv Service
   shell: systemctl status mqnamesrv | grep Active*
   register: check_mqnamesrv_service
