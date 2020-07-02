@@ -48,7 +48,7 @@
 #    shell: sudo sh -c "echo `` >> /data/logs/install_version.txt"
 
 
-check service state
+# check service state
 - name: Check mqnamesrv Service
   shell: systemctl status mqnamesrv | grep Active*
   register: check_mqnamesrv_service
