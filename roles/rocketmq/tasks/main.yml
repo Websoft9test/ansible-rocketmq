@@ -34,19 +34,11 @@
     state: started
     enabled: yes
    
-# set soft link, -f enforce the exist links
-# ln -sf src des
-#- name: set soft link
-#  shell: |
-#    ln -sf /opt/rocketmq  /data/wwwroot
-#    ln -sf /opt/rocketmq/conf /data/config
-
 # Check version,
 # must use sudo sh -c to solve the no-root permission
-#- block:
-#  - name: Check rocketchat Version
-#    shell: sudo sh -c "echo `` >> /data/logs/install_version.txt"
-
+- block:
+  - name: Check rocketchat Version
+    shell: sudo sh -c "echo 'no method for canvas version' 1>> /data/logs/install_version.txt"
 
 # check service state
 - name: Check mqnamesrv Service
