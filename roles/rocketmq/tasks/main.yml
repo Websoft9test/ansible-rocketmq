@@ -1,16 +1,25 @@
-#Installnation on  different os is same  
-- name: Download RocketMQ
+# prepare installation
+- name: rm -rf /data/wwwroot/rocketmq for second installation
+  shell: rm -rf /data/wwwroot/rocketmq
+
+# download rocketmq  
+- name: Download rocketmq
   unarchive:
     src: "{{rocketmq_download_url}}"
     dest: /data/wwwroot
     remote_src: yes
-       
-- name: Rename for rocketmq 
+    mode: 0750
+    
+- name: Rename dir name and Setting environment
   shell: |
-    mv /data/wwwroot/rocketmq-* /data/wwwroot/rocketmq 
-
-- name: Setting Environment
-  shell: export PATH="$PATH:/data/wwwroot/rocketmq/bin"
+    cd /data/wwwroot; if [ ! -d "rocketmq" ]; then mv rocketmq-* rocketmq; fi
+    export NAMESRV_ADDR=localhost:9876
+       
+- name: 
+  shell: |
+    mvn -Prelease-all -DskipTests clean install -U
+  args:
+    chdir: /data/wwwroot/rocketmq
 
 - name: Configuration RocketMQ Name Server
   copy:
