@@ -3,7 +3,7 @@ Description=RocketMQ Name Server
 After=network.target 
 [Service]
 Type=simple
-ExecStart=nohup /data/wwwroot/rocketmq/bin/mqnamesrv 
+ExecStart=/data/wwwroot/rocketmq/bin/mqnamesrv 
 ExecStop=/data/wwwroot/rocketmq/bin/mqshutdown namesrv
 [Install]
 WantedBy=multi-user.target

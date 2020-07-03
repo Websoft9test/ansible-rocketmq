@@ -25,18 +25,14 @@ RcoketMQ 是一款低延迟、高可靠、可伸缩、易于使用的消息中�
 
 ### Linux
 
-
-
-
-
 ```shell
-#下载
-cd /opt
-wget  https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip  
-unzip  rocketmq-all-4.7.0-bin-release.zip  
-cd /opt/rocketmq-all-4.7.0-bin-release/bin 
-sh mqnamesrv 
-sh mqbroker -n localhost:9876 
+# download rocketmq
+  wget  https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip  
+  unzip  rocketmq-all-4.7.0-bin-release.zip  
+  cd /opt/rocketmq-all-4.7.0-bin-release/bin
+  mvn -Prelease-all -DskipTests clean install -U
+  sh mqnamesrv 
+  sh mqbroker -n localhost:9876 
 
 ```
 
@@ -119,7 +115,7 @@ WantedBy=multi-user.target
 列出需要增加的环境变量以及增加环境变量的命令：
 
 * 名称 | 路径
-echo 'export PATH="$PATH:/opt/rocketmq-all-4.7.0-bin-release/bin"' >> /etc/profile
+export NAMESRV_ADDR=localhost:9876
 
 ## 版本号
 
