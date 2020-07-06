@@ -25,7 +25,7 @@
 - name: Change runbroker.sh file 
   lineinfile:
     dest:  /data/wwwroot/rocketmq/bin/runbroker.sh
-    regexp: '^JAVA_OPT* -server\s-Xms8g\s-Xmx8g\s-Xmn4g"$'
+    regexp: '^JAVA_OPT* -server -Xms8g -Xmx8g -Xmn4g"$'
     line:  'JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn125m"'
     backrefs: yes   
 
