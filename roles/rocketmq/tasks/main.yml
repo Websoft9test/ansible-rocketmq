@@ -1,8 +1,3 @@
-- name: Install open jdk
-  apt:
-    name: "openjdk-8-jdk"
-    update_cache: yes
-
 # prepare installation
 - name: rm -rf /data/wwwroot/rocketmq for second installation
   shell: rm -rf /data/wwwroot/rocketmq
