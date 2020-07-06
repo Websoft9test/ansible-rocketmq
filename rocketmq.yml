@@ -11,6 +11,6 @@
 
   roles:
     - { role: role_common, tags: "role_common"} 
-    - { role: role_jdk, tags: "role_jdk"} 
+  #  - { role: role_jdk, tags: "role_jdk"} 
     - { role: rocketmq, tags: "rocketmq"}
     - { role: role_preend, tags: "role_preend"}
