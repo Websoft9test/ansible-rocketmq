@@ -18,13 +18,13 @@
 - name: Change runserver.sh file 
   replace:
     path: /data/wwwroot/rocketmq/bin/runserver.sh
-    regexp: '*-server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"$'
+    regexp: '^*.-server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m".*$'
     replace: 'JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn125m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"'
 
 - name: Change runbroker.sh file 
   replace:
     path:  /data/wwwroot/rocketmq/bin/runbroker.sh
-    regexp: '*-server -Xms8g -Xmx8g -Xmn4g"$'
+    regexp: '^*.-server -Xms8g -Xmx8g -Xmn4g"*.$'
     line:  'JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn125m"'
         
 
