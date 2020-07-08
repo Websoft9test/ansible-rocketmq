@@ -50,7 +50,7 @@
     name: mqbroker
     state: started
     enabled: yes
-   
+
 # Check version,
 # must use sudo sh -c to solve the no-root permission
 - block:
