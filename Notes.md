@@ -35,9 +35,9 @@ Rocketmq是一款低延迟、高可靠、可伸缩、易于使用的消息中间
 
 1. 下载安装包时需要下载官网已经编译好的安装包(官网推荐第一个路径),直接解包运行即可,不需要管官方的mvn编译这条命令。
 2. 运行mqnamesrv和mqbroker时:
-   报错:Please set the JAVA_HOME variable in your environment, We need java(x64)!
-解决方法: 通过研究runserver.sh发现,ubuntu安装jdk时JAVA_HOME与centos差异较大,需要在公共role_jdk增设软连接。
-   报错:JVM内存不足
+   报错:Please set the JAVA_HOME variable in your environment, We need java(x64)!  
+解决方法: 通过研究runserver.sh发现,ubuntu安装jdk时JAVA_HOME与centos差异较大,需要在公共role_jdk增设软连接。  
+   报错:JVM内存不足  
 解决方法: 更改runserver.sh和runbroker.sh,详情见ansible项目。
 
 
