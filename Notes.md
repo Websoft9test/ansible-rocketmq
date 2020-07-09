@@ -2,7 +2,7 @@
 
 责任人：zxc
 
----
+***
  
 文档：[安装](http://rocketmq.apache.org/docs/quick-start/) | [配置](http://rocketmq.apache.org/docs/quick-start/)   
 平台： Debian家族 | RHEL家族 | Windows | macOS等
