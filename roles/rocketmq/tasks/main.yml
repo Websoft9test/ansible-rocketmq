@@ -51,18 +51,11 @@
     state: started
     enabled: yes
 
-- name: Pull docker-console images
-  shell: docker pull styletang/rocketmq-console-ng
-  
 - name: Start RocketMQ-Console container
-  docker_container: 
-    name: docker-console
-    image: "styletang/rocketmq-console-ng"
-    restart_policy: always
-    ports: ["8080:8080"]
-    env: "JAVA_OPTS=-Drocketmq.namesrv.addr=127.0.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+  shell: |
+    docker pull styletang/rocketmq-console-ng
+    docker run -e "JAVA_OPTS=-Drocketmq.namesrv.addr=127.0.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8080:8080 -t docker.io/styletang/rocketmq-console-ng
     
-  
 # Check version,
 # must use sudo sh -c to solve the no-root permission
 - block:
