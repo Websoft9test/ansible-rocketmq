@@ -51,6 +51,9 @@
     state: started
     enabled: yes
 
+- name: Pull docker-console images
+  shell: docker pull styletang/rocketmq-console-ng
+  
 - name: Start RocketMQ-Console container
   docker_container: 
     name: docker-console
