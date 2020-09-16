@@ -53,9 +53,10 @@
     
 - name: Start RocketMQ-Console container
   shell: |
+    ip=$(ip addr |grep inet |grep -v inet6 |grep eth0|awk '{print $2}' |awk -F "/" '{print $1}')
     docker pull styletang/rocketmq-console-ng 
     docker run --name=rocketmq_console -d \
-    -e "JAVA_OPTS=-Drocketmq.namesrv.addr=172.17.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" \
+    -e "JAVA_OPTS=-Drocketmq.namesrv.addr=$ip:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" \
     -p {{rockermq_container_port}}:8080  --restart=always -t docker.io/styletang/rocketmq-console-ng  
     
 # Check version,
